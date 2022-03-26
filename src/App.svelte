@@ -1,10 +1,9 @@
 <script>
   import { onMount } from 'svelte';
   import StatusBar from './components/StatusBar.svelte';
-  import Modal from './components/Modal.svelte';
+  import Modal from './components/Modal/Modal.svelte';
 
   let statusIndex = 0;
-
 
   let timePomodoro = 25;
   let timeBreakShort = 15;
@@ -15,14 +14,16 @@
 
   // onMount(() => {
   //   const timer = setInterval(() => {
-  // 		console.log('test');
+  //     console.log('test');
 
-  // 		++statusIndex;
+  //     ++statusIndex;
 
-  // 		if (statusIndex > 2) {
-  // 			statusIndex = 0;
-  // 		}
-  // 	}, 1000);
+  //     console.log(activeFont);
+
+  //     if (statusIndex > 2) {
+  //       statusIndex = 0;
+  //     }
+  //   }, 1000);
 
   //   return () => clearInterval(timer);
   // });
@@ -30,7 +31,7 @@
 
 <main>
   <StatusBar {statusIndex} />
-  <Modal />
+  <Modal {timePomodoro} {timeBreakShort} {timeBreakLong} {activeFont} {activeColor} />
 </main>
 
 <style>
