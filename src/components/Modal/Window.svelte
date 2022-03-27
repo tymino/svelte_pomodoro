@@ -5,7 +5,7 @@
   const dispatch = createEventDispatcher();
   const close = () => dispatch('close');
 
-  $: console.log($activeFont);
+  // $: console.log($activeFont);
 
   const setFont = (font) => {
     activeFont.set({ ...$activeFont, active: font });
@@ -18,13 +18,13 @@
 <div class="window">
   <div class="window__header">
     <div class="window__title">Settings</div>
-    <div class="window__close" on:click={close}>X</div>
+    <div class="window__close" on:click={close} />
   </div>
   <div class="window__body">
     <div class="time">
-      <div class="time__title" />
+      <div class="time__title">time (minutes)</div>
       <div class="time__input-wrapper">
-        {#each $time as { name, value }, name}
+        {#each $time as { name, value }}
           <div class="time__input">
             <label for={name}>{name}</label>
             <input type="number" id={name} bind:value />
@@ -84,36 +84,99 @@
     top: 50%;
     left: 50%;
     display: block;
-    width: 100px;
-    height: 100px;
     background: #fff;
+    border-radius: 20px;
 
     transform: translate(-50%, -50%);
   }
   .window__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid #b4b4b4;
   }
   .window__title {
+    font-size: 34px;
+    font-weight: bold;
   }
   .window__close {
+    position: relative;
+    cursor: pointer;
+  }
+  .window__close:hover {
+    opacity: 0.7;
+  }
+  .window__close::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 27px;
+    height: 4px;
+    background: #b4b4b4;
+    border-radius: 10px;
+
+    transform: translate(-50%, 0%) rotate(45deg);
+  }
+  .window__close::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 27px;
+    height: 4px;
+    background: #b4b4b4;
+    border-radius: 10px;
+
+    transform: translate(-50%, 0%) rotate(-45deg);
   }
 
   .window__body {
+    display: flex;
+    flex-direction: column;
   }
 
   .time {
+    margin: 0 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid #b4b4b4;
   }
-
   .time__title {
+    margin-bottom: 14px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
   }
   .time__input-wrapper {
+    display: flex;
   }
-  .time__input {
+  .time__input:not(:last-child) {
+    margin-right: 20px;
   }
   .time__input > label {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 24px;
   }
   .time__input > input {
+    width: 100px;
+    padding: 10px;
+    font-size: 22px;
+
+    background: #eff2fa;
+    border-radius: 6px;
+    border: none;
+  }
+  .time__input > input:focus {
+    outline: none;
   }
 
+  .font {
+  }
+  .font__title {
+  }
   .font__type {
     display: flex;
     align-items: center;
@@ -123,13 +186,18 @@
     background: gray;
     border-radius: 50%;
   }
-
   .font__type--active {
     background: darkblue;
   }
 
+  .color {
+  }
+  .color__title {
+  }
   .color__type {
     width: 20px;
     height: 20px;
+  }
+  .color__mark {
   }
 </style>
