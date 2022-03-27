@@ -1,5 +1,21 @@
 <script>
-  export let statusIndex;
+  import { statusIndex } from '../store';
+
+  import { onMount } from 'svelte';
+
+  // onMount(() => {
+  //   const timer = setInterval(() => {
+  //     console.log($statusIndex);
+
+  //     statusIndex.update((n) => n + 1);
+
+  //     if ($statusIndex > 2) {
+  //       statusIndex.set(0);
+  //     }
+  //   }, 1000);
+
+  //   return () => clearInterval(timer);
+  // });
 
   let statusName = ['pomodoro', 'short break', 'long break'];
 </script>
@@ -9,7 +25,7 @@
     {#each statusName as name}
       <div class="bar__name">{name}</div>
     {/each}
-    <div class="bar__selected" style="transform: translateX({116 * statusIndex}px)" />
+    <div class="bar__selected" style="transform: translateX({116 * $statusIndex}px)" />
   </div>
 </div>
 
@@ -32,7 +48,7 @@
     justify-content: center;
     padding: var(--padding);
 
-    background: #151932;
+    background: #141833;
     border: 1px solid black;
     border-radius: 40px;
   }

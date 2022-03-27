@@ -1,8 +1,11 @@
 <script>
-  export let handleClickModal;
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+  const toggle = () => dispatch('toggle');
 </script>
 
-<button class="settings" on:click={handleClickModal}>
+<button class="settings" on:click={toggle}>
   <svg
     version="1.1"
     class="settings__icon"
@@ -32,7 +35,6 @@
     </g>
   </svg>
 </button>
-
 
 <style>
   .settings {

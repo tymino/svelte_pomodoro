@@ -2,38 +2,22 @@
   import Button from './Button.svelte';
   import Window from './Window.svelte';
 
-  export let timePomodoro;
-  export let timeBreakShort;
-  export let timeBreakLong;
+  let isVisibleModal = true;
 
-  export let activeFont;
-  export let activeColor;
-
-  let isVisibleModal;
-
-  const handleClickModal = () => (isVisibleModal = !isVisibleModal);
-  const handleClickFont = (index) => {
-    activeFont = index.detail;
-    console.log(activeFont);
+  const handleToggleModal = () => {
+    isVisibleModal = !isVisibleModal;
   };
-
-  // const handleClickModal = () => (isVisibleModal = !isVisibleModal);
+  const handleCloseModal = () => {
+    isVisibleModal = false;
+  };
 </script>
 
 <div class="container">
   {#if isVisibleModal}
-    <Window
-      {timePomodoro}
-      {timeBreakShort}
-      {timeBreakLong}
-      {activeFont}
-      {activeColor}
-      on:close={handleClickModal}
-      on:font={handleClickFont}
-    />
+    <Window on:close={handleCloseModal} />
   {/if}
 
-  <Button {handleClickModal} />
+  <Button on:toggle={handleToggleModal} />
 </div>
 
 <style>
