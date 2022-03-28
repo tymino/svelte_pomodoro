@@ -7,7 +7,6 @@ export const time = writable([
   { name: 'short break', value: 15 },
   { name: 'long break', value: 5 },
 ]);
-
 export const activeFont = writable({
   active: 'Roboto',
   data: ['Comfortaa', 'Red Hat Mono', 'Roboto'],

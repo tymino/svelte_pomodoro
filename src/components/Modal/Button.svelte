@@ -41,10 +41,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    background: none;
   }
 
   .settings__icon {
     width: 40px;
     height: 40px;
+    fill: var(--color-gray);
+    opacity: .7;
   }
 </style>

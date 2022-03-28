@@ -5,8 +5,6 @@
   const dispatch = createEventDispatcher();
   const close = () => dispatch('close');
 
-  // $: console.log($activeFont);
-
   const setFont = (font) => {
     activeFont.set({ ...$activeFont, active: font });
     document.querySelector(':root').style.setProperty('--theme-font', font);
@@ -55,7 +53,12 @@
       <div class="color__title">color</div>
       <div class="color__wrapper">
         {#each $activeColor.data as color}
-          <div key={color} class="color__type" style="background: {color}" on:click={() => setColor(color)}>
+          <div
+            key={color}
+            class="color__type"
+            style="background: {color}; cursor: {$activeColor.active === color ? 'default' : 'pointer'}"
+            on:click={() => setColor(color)}
+          >
             {#if $activeColor.active === color}
               <svg
                 class="color__mark"
@@ -83,7 +86,7 @@
       </div>
     </div>
   </div>
-  <button class="window__button" style="background: {$activeColor.active}">apply</button>
+  <button class="window__button" on:click={close}>apply</button>
 </div>
 
 <style>
@@ -97,6 +100,8 @@
     background: #fff;
     border-radius: 20px;
 
+    color: var(--color-back-prime);
+
     transform: translate(-50%, -50%);
   }
   .window__header {
@@ -105,7 +110,7 @@
     align-items: center;
     width: 100%;
     padding: 20px 30px;
-    border-bottom: 1px solid #b4b4b4;
+    border-bottom: 1px solid var(--color-gray);
   }
   .window__title {
     font-size: 34px;
@@ -149,6 +154,7 @@
   }
   .window__button {
     padding: 16px 30px;
+    background: var(--theme-color);
     border: none;
     border-radius: 30px;
 
@@ -159,18 +165,18 @@
     text-transform: capitalize;
 
     transform: translateY(50%);
+    transition: box-shadow 0.4s ease;
+
+    cursor: pointer;
   }
   .window__button:hover {
-    filter: grayscale(20%);
-  }
-  .window__button:active {
-    filter: grayscale(0%);
+    box-shadow: 0px -6px 10px -4px inset var(--color-black);
   }
 
   .time {
     margin: 0 30px;
     padding: 20px 0;
-    border-bottom: 1px solid #b4b4b4;
+    border-bottom: 1px solid var(--color-gray);
   }
   .time__title {
     margin-bottom: 14px;
@@ -193,11 +199,13 @@
   .time__input > input {
     width: 100px;
     padding: 10px;
-    font-size: 22px;
 
-    background: #eff2fa;
+    background: var(--color-gray);
     border-radius: 6px;
     border: none;
+
+    color: var(--color-back-prime);
+    font-size: 22px;
   }
   .time__input > input:focus {
     outline: none;
@@ -209,7 +217,7 @@
     align-items: center;
     margin: 0 30px;
     padding: 20px 0;
-    border-bottom: 1px solid #b4b4b4;
+    border-bottom: 1px solid var(--color-gray);
   }
   .font__title {
     font-size: 16px;
@@ -227,10 +235,13 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    background: gray;
+    background: var(--color-gray);
     border-radius: 50%;
     font-size: 14px;
     text-transform: capitalize;
+
+    cursor: pointer;
+    user-select: none;
   }
   .font__type:not(:last-child) {
     margin-right: 10px;
@@ -238,6 +249,7 @@
   .font__type--active {
     color: #fff;
     background: #171932;
+    cursor: default;
   }
 
   .color {
@@ -264,6 +276,9 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+
+    cursor: pointer;
+    user-select: none;
   }
   .color__type:not(:last-child) {
     margin-right: 10px;

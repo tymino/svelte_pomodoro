@@ -6,7 +6,14 @@
 
 :root {
 	--theme-font: 'Roboto', sans-serif;
-	--theme-color: #f46d67;
+	--theme-color: #d682fb;
+
+	--color-back-prime: #1e2140;
+	--color-back-second: #141833;
+
+	--color-white: #fff;
+	--color-black: #000;
+	--color-gray: #e6e9f3;
 }
 
 
@@ -17,6 +24,6 @@ html {
 }
 
 body {
-	background: #1e2140;
+	background: var(--color-back-prime);
 }
 

@@ -3,27 +3,29 @@
 
   import { onMount } from 'svelte';
 
-  // onMount(() => {
-  //   const timer = setInterval(() => {
-  //     console.log($statusIndex);
+  onMount(() => {
+    const timer = setInterval(() => {
+      console.log($statusIndex);
 
-  //     statusIndex.update((n) => n + 1);
+      statusIndex.update((n) => n + 1);
 
-  //     if ($statusIndex > 2) {
-  //       statusIndex.set(0);
-  //     }
-  //   }, 1000);
+      if ($statusIndex > 2) {
+        statusIndex.set(0);
+      }
+    }, 1000);
 
-  //   return () => clearInterval(timer);
-  // });
+    return () => clearInterval(timer);
+  });
 
   let statusName = ['pomodoro', 'short break', 'long break'];
 </script>
 
 <div class="container">
   <div class="bar">
-    {#each statusName as name}
-      <div class="bar__name">{name}</div>
+    {#each statusName as name, index}
+      <div class="bar__name" style={index === $statusIndex ? 'color: var(--color-back-second)' : null}>
+        {name}
+      </div>
     {/each}
     <div class="bar__selected" style="transform: translateX({116 * $statusIndex}px)" />
   </div>
@@ -48,8 +50,7 @@
     justify-content: center;
     padding: var(--padding);
 
-    background: #141833;
-    border: 1px solid black;
+    background: var(--color-back-second);
     border-radius: 40px;
   }
 
@@ -60,10 +61,13 @@
     width: var(--btn-width);
     height: var(--btn-height);
 
-    color: #585c75;
+    color: var(--color-gray);
+    font-size: 15px;
     line-height: 20px;
     font-weight: bold;
+    opacity: 0.7;
     z-index: 2;
+    transition: color 1s ease-in;
   }
   .bar__selected {
     position: absolute;
@@ -71,9 +75,8 @@
     left: var(--padding);
     width: var(--btn-width);
     height: var(--btn-height);
-    background: #fa706d;
+    background: var(--theme-color);
     border-radius: 40px;
-
     transition: all 0.6s ease-in-out;
   }
 </style>
