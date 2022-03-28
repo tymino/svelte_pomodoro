@@ -9,8 +9,8 @@ export const time = writable([
 ]);
 
 export const activeFont = writable({
-  active: '0',
-  data: ['0', '1', '2'],
+  active: 'Roboto',
+  data: ['Comfortaa', 'Red Hat Mono', 'Roboto'],
 });
 export const activeColor = writable({
   active: '#d682fb',

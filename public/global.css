@@ -4,10 +4,15 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--theme-font: 'Roboto', sans-serif;
+	--theme-color: #f46d67;
+}
+
 
 
 html {
-	font-family: 'Roboto', sans-serif;
+	font-family: var(--theme-font);
 	font-size: 16px;
 }
 
