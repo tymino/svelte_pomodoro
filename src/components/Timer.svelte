@@ -76,9 +76,6 @@
 
       initTime();
     }
-
-    console.log(timeToDegree());
-    //
   };
 
   onMount(() => {
@@ -103,12 +100,12 @@
 
 <style>
   .container {
-    /* display: flex; */
     margin-top: 60px;
     margin-bottom: 60px;
 
-    border: 1px solid red;
+    background: linear-gradient(-45deg, var(--color-gradient), var(--color-back-second) 70.71%);
     border-radius: 50%;
+    box-shadow: -80px -60px 80px -20px var(--color-gradient), 80px 60px 80px -20px var(--color-back-second);
   }
 
   .timer {
@@ -117,7 +114,7 @@
     align-items: center;
     justify-content: center;
     margin: 20px;
-    border: 1px solid green;
+    background: var(--color-back-second);
     border-radius: 50%;
   }
   .timer__bar {

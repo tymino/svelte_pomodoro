@@ -2,14 +2,10 @@ import { writable } from 'svelte/store';
 
 export const statusIndex = writable(0);
 
-// time:
-// pomodoro 20-30
-// short 5-10
-// long 15-30
 export const time = writable([
-  { name: 'pomodoro', value: .02, min: 0, max: 0 },
-  { name: 'short break', value: .02, min: 0, max: 0 },
-  { name: 'long break', value: .1, min: 0, max: 0 },
+  { name: 'pomodoro', value: 20, min: 20, max: 40 },
+  { name: 'short break', value: 5, min: 5, max: 10 },
+  { name: 'long break', value: 15, min: 15, max: 30 },
 ]);
 export const timerData = writable({
 
