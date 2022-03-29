@@ -2,7 +2,7 @@
   import Button from './Button.svelte';
   import Window from './Window.svelte';
 
-  let isVisibleModal = true;
+  let isVisibleModal = false;
 
   const handleToggleModal = () => {
     isVisibleModal = !isVisibleModal;

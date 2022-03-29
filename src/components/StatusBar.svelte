@@ -1,22 +1,6 @@
 <script>
   import { statusIndex } from '../store';
 
-  import { onMount } from 'svelte';
-
-  onMount(() => {
-    const timer = setInterval(() => {
-      console.log($statusIndex);
-
-      statusIndex.update((n) => n + 1);
-
-      if ($statusIndex > 2) {
-        statusIndex.set(0);
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  });
-
   let statusName = ['pomodoro', 'short break', 'long break'];
 </script>
 
