@@ -65,9 +65,9 @@
     font-size: 15px;
     line-height: 20px;
     font-weight: bold;
-    opacity: 0.7;
+    opacity: 0.5;
+    transition: color .4s ease-in;
     z-index: 2;
-    transition: color 1s ease-in;
   }
   .bar__selected {
     position: absolute;

@@ -56,7 +56,8 @@
           <div
             key={color}
             class="color__type"
-            style="background: {color}; cursor: {$activeColor.active === color ? 'default' : 'pointer'}"
+            style="background: {color}; cursor: {$activeColor.active === color ? 'default' : 'pointer'};
+            {$activeColor.active === color ? 'border: 1px solid rgba(0,0,0,0)' : ''};"
             on:click={() => setColor(color)}
           >
             {#if $activeColor.active === color}
@@ -90,6 +91,11 @@
 </div>
 
 <style>
+  :root {
+    --top: 12px;
+    --left: 14px;
+  }
+
   .window {
     position: fixed;
     top: 50%;
@@ -119,18 +125,26 @@
   .window__close {
     position: relative;
     cursor: pointer;
+    width: 29px;
+    height: 29px;
+    transition: all .3s linear;
+
+    border-radius: 50%;
   }
   .window__close:hover {
-    opacity: 0.7;
+    transform: rotate(90deg);
   }
+
+  
+
   .window__close::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 27px;
+    top: var(--top);
+    left: var(--left);
+    width: 28px;
     height: 4px;
-    background: #b4b4b4;
+    background: var(--color-gray-dark);
     border-radius: 10px;
 
     transform: translate(-50%, 0%) rotate(45deg);
@@ -138,11 +152,11 @@
   .window__close::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 27px;
+    top: var(--top);
+    left: var(--left);
+    width: 28px;
     height: 4px;
-    background: #b4b4b4;
+    background: var(--color-gray-dark);
     border-radius: 10px;
 
     transform: translate(-50%, 0%) rotate(-45deg);
@@ -170,7 +184,7 @@
     cursor: pointer;
   }
   .window__button:hover {
-    box-shadow: 0px -6px 10px -4px inset var(--color-black);
+    box-shadow: 0px 4px 10px -4px inset var(--color-black);
   }
 
   .time {
@@ -192,6 +206,7 @@
     margin-right: 20px;
   }
   .time__input > label {
+    color: var(--color-gray-dark);
     font-size: 12px;
     font-weight: bold;
     line-height: 24px;
@@ -236,15 +251,20 @@
     width: 40px;
     height: 40px;
     background: var(--color-gray);
+    border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 50%;
     font-size: 14px;
     text-transform: capitalize;
 
+    transition: all .3s ease-in;
     cursor: pointer;
     user-select: none;
   }
   .font__type:not(:last-child) {
     margin-right: 10px;
+  }
+  .font__type:hover:not(.font__type--active) {
+    border: 1px solid var(--color-back-prime);
   }
   .font__type--active {
     color: #fff;
@@ -276,9 +296,14 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0);
 
+    transition: all .3s ease-in;
     cursor: pointer;
     user-select: none;
+  }
+  .color__type:hover {
+    border: 1px solid var(--color-back-prime);
   }
   .color__type:not(:last-child) {
     margin-right: 10px;
