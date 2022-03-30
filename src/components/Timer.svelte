@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { statusIndex, time, activeColor } from '../store';
+  import { statusIndex, time, resetTimer, activeColor } from '../store';
 
   const MAX_COUNT_POMODORO = 3; // var = var - 1
   const LINE_WIDTH = 14;
@@ -11,7 +11,7 @@
   let degrees = 360;
   let currentTime;
   let displayTime;
-  let isPlayTimer = true;
+  let isPlayTimer;
   $: buttonName = isPlayTimer ? 'pause' : 'play';
 
   const correctTime = (time) => {
@@ -32,12 +32,19 @@
   };
 
   const initTime = () => {
+    countPomodoro = 0;
+    degrees = 360;
+    isPlayTimer = false;
+
     currentTime = $time[$statusIndex].value * 60;
     displayTime = correctTime($time[$statusIndex].value * 60);
   };
 
   const initCanvas = () => {
     const radians = (degrees * Math.PI) / 180;
+
+    canvas.width = 300;
+    canvas.height = 300;
 
     ctx = canvas.getContext('2d');
     ctx.strokeStyle = $activeColor.active;
@@ -46,7 +53,7 @@
 
     ctx.beginPath();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2 - 14, 0, radians, false);
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2 - 11, 0, radians, false);
     ctx.stroke();
 
     requestAnimationFrame(initCanvas);
@@ -59,7 +66,7 @@
     degrees = timeToDegree();
     displayTime = correctTime(currentTime);
 
-    if (degrees <= 0) {
+    if (currentTime <= 0) {
       degrees = 360;
 
       if ($statusIndex === 0 && countPomodoro < MAX_COUNT_POMODORO) {
@@ -81,6 +88,11 @@
   onMount(() => {
     initTime();
     initCanvas();
+
+    resetTimer.set(() => {
+      initTime();
+      initCanvas();
+    });
 
     const timer = setInterval(() => updateTimer(), 1000);
 
@@ -113,7 +125,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    margin: 14px;
     background: var(--color-back-second);
     border-radius: 50%;
   }
@@ -130,16 +142,20 @@
     color: var(--color-white);
   }
   .timer__time {
-    font-size: 6rem;
+    font-size: 5rem;
     font-weight: bold;
   }
   .timer__button {
     margin-top: 20px;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 4px;
 
     cursor: pointer;
+    transition: opacity .4s ease-out;
+  }
+  .timer__button:hover {
+    opacity: .7;
   }
 </style>

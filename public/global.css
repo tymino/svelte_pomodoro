@@ -1,31 +1,28 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-	--theme-font: 'Roboto', sans-serif;
-	--theme-color: #d682fb;
+  --theme-font: 'Roboto', sans-serif;
+  --theme-color: #d682fb;
 
-	--color-back-prime: #1e2140;
-	--color-back-second: #141833;
-	--color-gradient: rgba(63, 67, 102, .6);
+  --color-back-prime: #1e2140;
+  --color-back-second: #141833;
+  --color-gradient: #3f436699;
 
-	--color-white: #fff;
-	--color-black: #000;
-	--color-gray: #e6e9f3;
-	--color-gray-dark: #b4b4b4;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-gray: #e6e9f3;
+  --color-gray-dark: #b4b4b4;
 }
 
-
-
 html {
-	font-family: var(--theme-font);
-	font-size: 16px;
+  font-family: var(--theme-font);
+  font-size: 16px;
 }
 
 body {
-	background: var(--color-back-prime);
+  background: var(--color-back-prime);
 }
-

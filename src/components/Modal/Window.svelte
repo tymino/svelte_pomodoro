@@ -1,9 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { time, activeFont, activeColor } from '../../store';
+  import { time, resetTimer, activeFont, activeColor } from '../../store';
 
   const dispatch = createEventDispatcher();
-  const close = () => dispatch('close');
+  const close = () => {
+    $resetTimer();
+    dispatch('close');
+  };
 
   const setFont = (font) => {
     activeFont.set({ ...$activeFont, active: font });
@@ -24,10 +27,10 @@
     <div class="time">
       <div class="time__title">time (minutes)</div>
       <div class="time__input-wrapper">
-        {#each $time as { name, value }}
+        {#each $time as { name, value, min, max }}
           <div class="time__input">
             <label for={name}>{name}</label>
-            <input type="number" id={name} bind:value />
+            <input type="number" id={name} bind:value step="1" {min} {max} />
           </div>
         {/each}
       </div>
@@ -105,10 +108,9 @@
     flex-direction: column;
     background: #fff;
     border-radius: 20px;
-
     color: var(--color-back-prime);
-
     transform: translate(-50%, -50%);
+    z-index: 10;
   }
   .window__header {
     display: flex;
@@ -127,15 +129,13 @@
     cursor: pointer;
     width: 29px;
     height: 29px;
-    transition: all .3s linear;
+    transition: all 0.3s linear;
 
     border-radius: 50%;
   }
   .window__close:hover {
     transform: rotate(90deg);
   }
-
-  
 
   .window__close::after {
     content: '';
@@ -256,7 +256,7 @@
     font-size: 14px;
     text-transform: capitalize;
 
-    transition: all .3s ease-in;
+    transition: all 0.3s ease-in;
     cursor: pointer;
     user-select: none;
   }
@@ -298,7 +298,7 @@
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0);
 
-    transition: all .3s ease-in;
+    transition: all 0.3s ease-in;
     cursor: pointer;
     user-select: none;
   }
